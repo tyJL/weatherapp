@@ -60,6 +60,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+
 PrognosisPage prognosis = const PrognosisPage(prognosisData: []);
 
 WeatherPage weather = const WeatherPage();

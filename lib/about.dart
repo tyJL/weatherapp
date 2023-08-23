@@ -21,15 +21,18 @@ class AboutPage extends StatelessWidget {
             style: TextStyle(
               fontSize: 40,
               fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
           SizedBox(height: 20),
-          Text("This if the app developed for the course \n"
-              " 1DV535 at Linnaeus University by using\n"
-              "Flutter and OpenWeatherMap's API.",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                fontSize: 20
+          Padding(padding: EdgeInsets.all(20),
+            child: Text("This if the app developed for the\n"
+                        "course 1DV535 at Linnaeus\n"
+                        "University by using Flutter and\n"
+                        "OpenWeatherMap's API.",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 20,
+              ),
             ),
           ),
           SizedBox(height: 20),
