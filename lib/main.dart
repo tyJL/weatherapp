@@ -1,13 +1,13 @@
-import 'dart:convert';
+// import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:http/http.dart';
-import 'package:permission_handler/permission_handler.dart';
+// import 'package:geolocator/geolocator.dart';
+// import 'package:http/http.dart';
+// import 'package:permission_handler/permission_handler.dart';
 import 'package:weatherapp/weather.dart';
 import 'about.dart';
-import 'env/env.dart';
+//import 'env/env.dart';
 import 'package:go_router/go_router.dart';
-import 'weatherData.dart';
+// import 'weatherData.dart';
 import 'prognosis.dart';
 // import 'weather.dart';
 void main() {

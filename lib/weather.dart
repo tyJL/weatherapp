@@ -59,7 +59,7 @@ class _WeatherPageState extends State<WeatherPage> {
         url = "Please provide location permission";
 
       });
-      return fetchJsonData(url!);
+      var testar = fetchJsonData(url!);
     }
 
 
@@ -69,6 +69,7 @@ class _WeatherPageState extends State<WeatherPage> {
 
   @override
   Widget build(BuildContext context) {
+    var position = getCurrentLocation();
     return Scaffold(
       appBar: AppBar(title: const Center(
         child: Text('The Weather App'),
@@ -81,7 +82,7 @@ class _WeatherPageState extends State<WeatherPage> {
           children: [
             const CircularProgressIndicator(),
             const SizedBox(height: 30),
-            Text(url! ?? "Fetching location...",
+            Text(weather?.icon ?? "Fetching location...",
               style: const TextStyle(fontSize: 18),
             ),
           ],
