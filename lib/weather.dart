@@ -9,17 +9,18 @@ import 'weatherData.dart';
 
 
 class WeatherPage extends StatefulWidget {
-  const WeatherPage({ super.key, required this.url});
+  const WeatherPage({ super.key});
   // final String? weatherData;
-  final String? url;
+
 
   @override
   State<WeatherPage> createState() => _WeatherPageState();
 }
 
 class _WeatherPageState extends State<WeatherPage> {
-  String? _url;
+  String? url;
   WeatherData? weather;
+  List<String?> test = [];
 
   @override
   void initState() {
@@ -27,37 +28,38 @@ class _WeatherPageState extends State<WeatherPage> {
     getCurrentLocation();
   }
 
-  Future<void> fetchJsonData(String url) async {
+  Future<WeatherData?> fetchJsonData(String url) async {
 
     final response = await get(Uri.parse(url));
 
     if (response.statusCode == 200) {
       setState(() {
         weather = WeatherData.fromJson(json.decode(response.body));
+        print(weather!.icon);
       });
     } else {
       throw Exception('Failed to load JSON data');
     }
-    print(weather!);
+    return weather;
   }
 
 
-  Future<void> getCurrentLocation() async {
+  Future<WeatherData?> getCurrentLocation() async {
     PermissionStatus permissionStatus = await Permission.location.request();
 
     if (permissionStatus.isGranted) {
       Position position = await Geolocator.getCurrentPosition(
           desiredAccuracy: LocationAccuracy.high);
       setState(() {
-        _url = "https://api.openweathermap.org/data/2.5/weather?lat=${position.latitude}&lon=${position.longitude}&appid=${Env.API_key}";
-
+        url = "https://api.openweathermap.org/data/2.5/weather?lat=${position.latitude}&lon=${position.longitude}&appid=${Env.API_key}";
+        print(url);
       });
     } else {
       setState(() {
-        _url = "Please provide location permission";
+        url = "Please provide location permission";
 
       });
-      fetchJsonData(_url!);
+      return fetchJsonData(url!);
     }
 
 
@@ -70,14 +72,16 @@ class _WeatherPageState extends State<WeatherPage> {
     return Scaffold(
       appBar: AppBar(title: const Center(
         child: Text('The Weather App'),
-      ),
+        ),
       ),
       body: Center(
 
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(_url ?? "funkar inte för tillfället...",
+            const CircularProgressIndicator(),
+            const SizedBox(height: 30),
+            Text(url! ?? "Fetching location...",
               style: const TextStyle(fontSize: 18),
             ),
           ],
